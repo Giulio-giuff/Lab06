@@ -64,6 +64,8 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
+        txt1=ft.Text("Automobili", size=25)
+        btnMostra=ft.ElevatedButton(text="Mostra", onlick=self.controller.mostra_automobili())
 
         # --- LAYOUT ---
         self.page.add(
@@ -83,6 +85,8 @@ class View:
 
             # Sezione 3
             # TODO
+            ft.Row(spacing=200, controls=[txt1, btnMostra])
+
 
             # Sezione 4
             # TODO

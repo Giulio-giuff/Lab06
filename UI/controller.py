@@ -29,3 +29,13 @@ class Controller:
 
     # Altre Funzioni Event Handler
     # TODO
+    def mostra_automobili(self):
+        lista=ft.ListView(expand=True)
+        lista2=Autonoleggio.get_automobili(self)
+        for riga in lista2:
+            lista.controls.append(riga)
+        View.self.page.add(lista)
+        View.self.page.update()
+
+
+
