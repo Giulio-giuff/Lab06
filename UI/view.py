@@ -68,6 +68,9 @@ class View:
         txt1=ft.Text("Automobili", size=25)
         btnMostra=ft.ElevatedButton("Mostra", on_click=self.controller.mostra_automobili)
         txt2=ft.Text("Cerca Automobile", size=25)
+        self.testoRicerca = ft.TextField(label='Modello')
+        btnCerca=ft.ElevatedButton("Cerca", on_click=self.controller.cerca_automobili)
+
 
         # --- LAYOUT ---
         self.page.add(
@@ -89,12 +92,14 @@ class View:
             # TODO
             ft.Row(spacing=200, controls=[txt1, btnMostra]),
             ft.Row(spacing=200, controls=[spazio]),
+            ft.Container(height=75),
             ft.Divider(),
 
 
             # Sezione 4
             # TODO
-            ft.Row(spacing=200, controls=[txt2])
+            ft.Row(spacing=200, controls=[txt2], alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row(spacing=200, controls=[self.testoRicerca, btnCerca]),
         )
 
     def cambia_tema(self, e):

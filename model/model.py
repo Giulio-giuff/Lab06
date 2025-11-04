@@ -13,6 +13,7 @@ class Autonoleggio:
     def __init__(self, nome, responsabile):
         self._nome = nome
         self._responsabile = responsabile
+        self.lista_auto = []
 
     @property
     def nome(self):
@@ -36,12 +37,15 @@ class Autonoleggio:
             :return: una lista con tutte le automobili presenti oppure None
         """
         # TODO
-        lista_auto = []
+        tabella = []
         cnx=get_connection()
         cursor=cnx.cursor()
         cursor.execute('SELECT * FROM automobile')
-        lista_auto=cursor.fetchall()
-        return lista_auto
+        tabella=cursor.fetchall()
+        for riga in tabella:
+            macchina=Automobile(*riga)
+            self.lista_auto.append(macchina)
+        return self.lista_auto
 
     def cerca_automobili_per_modello(self, modello) -> list[Automobile] | None:
         """
@@ -50,3 +54,11 @@ class Autonoleggio:
             :return: una lista con tutte le automobili di marca e modello indicato oppure None
         """
         # TODO
+        lista_modello=[]
+        self.lista_auto=self.get_automobili()
+        for macchine in self.lista_auto:
+            if str(macchine.modello) == str(modello):
+                lista_modello.append(macchine)
+        return lista_modello
+
+

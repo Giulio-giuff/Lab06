@@ -1,6 +1,7 @@
 import flet as ft
 from UI.view import View
 from model.model import Autonoleggio
+from model.automobile import Automobile
 
 '''
     CONTROLLER:
@@ -31,18 +32,24 @@ class Controller:
     # TODO
     def mostra_automobili(self,e):
         if self._view.page:
-            lista = ft.ListView(expand=True)
+            self.lista = ft.ListView(expand=True)
 
             lista2 = self._model.get_automobili()
-            for codice, marca, modello, anno, posti, disponibile in lista2:
-                txt = ft.Text(f"{codice}, {marca}, {modello}, {anno}, {posti}, {disponibile}", size=25)
-                lista.controls.append(txt)
-            self._view.page.add(lista)
+            for macchina in lista2:
+                self.lista.controls.append(ft.Text(macchina))
+            self._view.page.add(self.lista)
 
         else:
             None
-
-        self._view.update()
+    def cerca_automobili(self,e):
+        modello = self._view.testoRicerca.value
+        lista=self._model.cerca_automobili_per_modello(modello)
+        print(lista)
+        lista_modello_view=ft.ListView(expand=True)
+        for macchine in lista:
+            lista_modello_view.controls.append(ft.Text(macchine))
+        self._view.page.add(lista_modello_view)
+        self._view.page.update()
 
 
 
